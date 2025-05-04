@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
 
 # === Load Model ===
-MODEL_PATH = "best_brain_tumor_model.keras"
+MODEL_PATH = "brain_tumor_model.keras"
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # === Class labels — MUST match training order ===
