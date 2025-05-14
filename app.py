@@ -51,8 +51,15 @@ def predict():
         confidence = float(output[0][class_index]) * 100
         label = class_labels[class_index]
 
+        # Custom message formatting
+        if label == "no_tumor":
+            message = "no_tumor"
+        else:
+            message = f"There is a big chance it is {label.replace('_', ' ').title()}"
+
         return jsonify({
             "label": label,
+            "message": message,
             "confidence": round(confidence, 2)
         })
 
