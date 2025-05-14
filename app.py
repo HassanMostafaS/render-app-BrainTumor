@@ -55,7 +55,7 @@ def predict():
         if label == "no_tumor":
             message = "no_tumor"
         else:
-            message = f"There is a big chance it is {label.replace('_', ' ').title()}"
+            message = f"This scan may indicate signs of {label.replace('_', ' ').title()}"
 
         return jsonify({
             "label": label,
