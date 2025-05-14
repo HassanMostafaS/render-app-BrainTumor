@@ -53,7 +53,7 @@ def predict():
 
         # Custom message formatting
         if label == "no_tumor":
-            message = "no_tumor"
+            message = "No Tumor"
         else:
             message = f"This scan may indicate signs of {label.replace('_', ' ').title()}"
 
