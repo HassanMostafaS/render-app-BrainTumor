@@ -6,27 +6,25 @@ from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
 
 # === Load TFLite Model ===
-TFLITE_MODEL_PATH = "brain_tumor_model.tflite"  # Replace with your actual filename
+TFLITE_MODEL_PATH = "BrainTumor_model_updated.tflite"  # Replace with your actual filename
 interpreter = tf.lite.Interpreter(model_path=TFLITE_MODEL_PATH)
 interpreter.allocate_tensors()
 
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
-# === Class Labels (must match training order) ===
 class_labels = ['glioma', 'meningioma', 'no_tumor', 'pituitary']
 
-# === Flask App ===
+
 app = Flask(__name__)
 
-# === Image Preprocessing ===
+# Image Preprocessing 
 def preprocess_image(img_path, target_size=(150, 150)):
     img = image.load_img(img_path, target_size=target_size)
     img_array = image.img_to_array(img) / 255.0  # Normalize
     img_array = np.expand_dims(img_array, axis=0).astype(np.float32)
     return img_array
 
-# === Prediction Endpoint ===
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'image' not in request.files:
